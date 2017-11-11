@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="main_game_broad" type="id">main_game_broad</item>
+    <item name="main_select_column" type="id">main_select_column</item>
+    <item name="main_restart" type="id">main_restart</item>
+</resources>

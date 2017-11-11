@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="divider">2dp</dimen>
+    <dimen name="activity_main_width">10dp</dimen>
+</resources>

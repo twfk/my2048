@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_main_width"
+    android:paddingLeft="@dimen/activity_main_width"
+    android:paddingRight="@dimen/activity_main_width"
+    android:paddingTop="@dimen/activity_main_width"
+    tools:context="com.example.marco.my2048.MainActivity">
+
+    <TextView
+        android:id="@+id/main_curr_max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/curr_max_scor"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/ape_shape_score"/>
+
+    <TextView
+        android:id="@+id/main_history_max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/history_max_score"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ape_shape_score"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/main_curr_max"
+        android:layout_marginTop="@dimen/activity_main_width"
+        >
+
+        <Button
+            android:id="@id/main_restart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="7dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_bt_bg"
+            android:text="@string/restart"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@id/main_select_column"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/select_cloumn"
+            android:background="@drawable/selector_bt_bg"
+            android:layout_marginLeft="7dp"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+    <GridLayout
+        android:id="@id/main_game_broad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_game_broad">
+    </GridLayout>
+
+
+</RelativeLayout>

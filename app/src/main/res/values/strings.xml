@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">my2048</string>
+    <string name="curr_max_scor">当前最高：0</string>
+    <string name="history_max_score">历史最高：0</string>
+    <string name="restart">重新开始</string>
+    <string name="select_cloumn">选择列数</string>
+</resources>

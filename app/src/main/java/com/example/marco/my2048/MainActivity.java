@@ -218,7 +218,6 @@ public class MainActivity extends AppCompatActivity {
             switch (which) {
                 case DialogInterface.BUTTON_NEGATIVE:
                     restart();
-
                     break;
                 case DialogInterface.BUTTON_NEUTRAL:
                     finish();

@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addNum(int count){
+        points.clear();
         checkNull();
         for (int i = 0; i < count; i++) {
             if(points.size()>0){
@@ -153,8 +154,8 @@ public class MainActivity extends AppCompatActivity {
                 .setNeutralButton("tui chu you xi ", dialogClickLis)
                 .show();
 
-
         saveScore();
+
     }
 
     private void restart(){

@@ -7,8 +7,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tvCurrscore;
     private TextView tvHistoryscore;
+    private Button btRestart;
+    private Button btSelectColum;
     private final static  String LEVEL_4 = "LEVEL4";
     private final static  String LEVEL_5 = "LEVEL5";
     private final static  String LEVEL_6 = "LEVEL6";
@@ -46,24 +50,54 @@ public class MainActivity extends AppCompatActivity {
         broad = (GridLayout) findViewById(R.id.main_game_broad);
         tvCurrscore = (TextView) findViewById(R.id.main_curr_max);
         tvHistoryscore = (TextView) findViewById(R.id.main_history_max);
+        btRestart = (Button)findViewById(R.id.main_restart);
+        btSelectColum =(Button)findViewById(R.id.main_select_column);
+        btSelectColum.setOnClickListener(clickLis);
+        btRestart.setOnClickListener(clickLis);
         init();
-        initGame();
+        SelectColum();
         }
+
+        private View.OnClickListener clickLis = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch(v.getId()){
+                    case R.id.main_restart:
+                        restart();
+                        break;
+                    case R.id.main_select_column:
+                        SelectColum();
+                        break;
+                }
+            }
+        };
+
+    private void SelectColum(){
+        new AlertDialog.Builder(this)
+                .setItems(new String[]{"4X4","5X5","6X6"},dialogClickLis)
+                .show()
+                .setCanceledOnTouchOutside(false);
+    }
 
     private void init(){
         divider = getResources().getDimensionPixelSize(R.dimen.divider);
         margin = getResources().getDimensionPixelSize(R.dimen.activity_main_width);
-        int screenWidth = getResources().getDisplayMetrics().widthPixels;
-        itemWidth = (screenWidth -2*margin -(columCount+1)*divider) /columCount;
+        //int screenWidth = getResources().getDisplayMetrics().widthPixels;
+        //itemWidth = (screenWidth -2*margin -(columCount+1)*divider) /columCount;
         points = new LinkedList<>();
         nums = new LinkedList<>();
         animScale = AnimationUtils.loadAnimation(this, R.anim.anim_scale);
     }
 
     private void initGame(){
+        broad.removeAllViews();// first to remove all grid
+        broad.setColumnCount(columCount);
+        int screenWidth = getResources().getDisplayMetrics().widthPixels;
+        itemWidth = (screenWidth -2*margin -(columCount+1)*divider) /columCount;
+
         tvHistoryscore.setText(String.format("li shi zui gao: %d", getMaxScore()));
 
-        broad.setColumnCount(columCount);
+
         items = new Item[columCount][columCount];
         for (int i = 0; i < columCount; i++) {
             for(int j = 0; j < columCount; j++){
@@ -157,7 +191,8 @@ public class MainActivity extends AppCompatActivity {
                 .setMessage(msg)
                 .setNegativeButton("chong xin kai shi ", dialogClickLis)
                 .setNeutralButton("tui chu you xi ", dialogClickLis)
-                .show();
+                .show()
+                .setCanceledOnTouchOutside(false);
 
         saveScore();
 
@@ -166,17 +201,44 @@ public class MainActivity extends AppCompatActivity {
     private void restart(){
         saveScore();
 
+        tvHistoryscore.setText(String.format("li shi zui gao: %d", getMaxScore()));
+        for (int i = 0; i < columCount; i++) {
+            for (int j = 0; j < columCount; j++) {
+                items[i][j].setNum(0);
+            }
+            addNum(2);
+
+        }
     }
+
     private DialogInterface.OnClickListener dialogClickLis = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
 
             switch (which) {
                 case DialogInterface.BUTTON_NEGATIVE:
+                    restart();
 
                     break;
                 case DialogInterface.BUTTON_NEUTRAL:
+                    finish();
                     break;
+                case 0:
+                    columCount =4;
+                    level = LEVEL_4;
+                    initGame();
+                    break;
+                case 1:
+                    columCount =5;
+                    level = LEVEL_5;
+                    initGame();
+                    break;
+                case 2:
+                    columCount =6;
+                    level = LEVEL_6;
+                    initGame();
+                    break;
+
             }
         }
     };

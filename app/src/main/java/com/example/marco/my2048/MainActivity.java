@@ -7,6 +7,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private final static  String LEVEL_6 = "LEVEL6";
 
     private String level = LEVEL_4;
+    private Animation animScale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         itemWidth = (screenWidth -2*margin -(columCount+1)*divider) /columCount;
         points = new LinkedList<>();
         nums = new LinkedList<>();
+        animScale = AnimationUtils.loadAnimation(this, R.anim.anim_scale);
     }
 
     private void initGame(){
@@ -91,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         Point point = points.get(index);
         int num= Math.random()>0.1 ? 2 :4;
         items[point.y][point.x].setNum(num);
+        items[point.y][point.x].startAnimation(animScale);
         points.remove(index);
     }
 
